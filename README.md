@@ -1,16 +1,40 @@
 ## Hi there 👋
 
-<!--
-**tamilarsen-dev/tamilarsen-dev** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+👨‍💻 **Tamil Arsen**  
+🎓 Informatics Engineering Student  
+❤️ Enthusiast in C++ & Graphics Programming  
+📱 Exploring Flutter for mobile apps  
+⚙️ Focused on Node.js backend development  
+🌱 Always curious, always learning  
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🔧 Tech Stack
+
+- **Languages**: C++, JavaScript, Dart  
+- **Frameworks & Tools**: Flutter, Node.js, Express.js  
+- **Other Interests**: Graphic Programming, Open Source  
+
+---
+
+### 📌 Current Focus
+
+- 🚀 Building mobile apps with **Flutter**  
+- ⚙️ Learning backend development with **Node.js**  
+- 🎮 Exploring advanced concepts in **C++ & Graphics Programming**  
+
+---
+
+### 📂 Featured Projects
+
+🔹 [**Flutter App**](#) – contoh link ke repo  
+🔹 [**Node.js Backend**](#)  
+🔹 [**C++ Graphics Experiment**](#)  
+
+---
+
+### 🌐 Connect with Me
+
+- GitHub: [@tamilarsen](https://github.com/tamilarsen)  
+- LinkedIn: [Tamil Arsen](#)  
+- Twitter: [@tamilarsen](#)  
