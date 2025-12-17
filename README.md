@@ -3,7 +3,7 @@
 👨‍💻 **Tamil Arsen**  
 🎓 Informatics Engineering Student  
 ❤️ Enthusiast in C++ & Graphics Programming  
-📱 Exploring Flutter for mobile apps  
+📱 Exploring Flutter & Kotlin for mobile apps  
 ⚙️ Focused on Node.js backend development  
 🌱 Always curious, always learning  
 
