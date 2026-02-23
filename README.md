@@ -1,40 +1,38 @@
-## Hi there 👋
+## Hi, I'm Tamil Arsen👋
 
-👨‍💻 **Tamil Arsen**  
-🎓 Informatics Engineering Student  
-❤️ Enthusiast in C++ & Graphics Programming  
-📱 Exploring Flutter & Kotlin for mobile apps  
-⚙️ Focused on Node.js backend development  
-🌱 Always curious, always learning  
+**Computer Science student** with a focus on **backend engineering** and system-oriented thinking.  
+I primarily work with **Node.js (JavaScript/TypeScript)** for backend services, while using **C++** to strengthen low-level understanding and problem-solving discipline.
+
+I also explore **Kotlin** for mobile development, with an emphasis on clean architecture and maintainable code.
 
 ---
 
-### 🔧 Tech Stack
+### 🛠 Tech Stack
 
-- **Languages**: C++, JavaScript, Dart  
-- **Frameworks & Tools**: Flutter, Node.js, Express.js  
-- **Other Interests**: Graphic Programming, Open Source  
-
----
-
-### 📌 Current Focus
-
-- 🚀 Building mobile apps with **Flutter**  
-- ⚙️ Learning backend development with **Node.js**  
-- 🎮 Exploring advanced concepts in **C++ & Graphics Programming**  
+- **Languages**: JavaScript / TypeScript, C++
+- **Backend**: Node.js, Express.js
+- **Databases**: PostgreSQL
+- **Mobile**: Kotlin
+- **Tools**: Git, Linux
 
 ---
 
-### 📂 Featured Projects
+### 📍 Current Focus
 
-🔹 [**Flutter App**](#) – contoh link ke repo  
-🔹 [**Node.js Backend**](#)  
-🔹 [**C++ Graphics Experiment**](#)  
+- Designing and building backend services with **Node.js**
+- Improving code structure, clarity, and maintainability
+- Strengthening fundamentals through **C++**
 
 ---
 
-### 🌐 Connect with Me
+### 📂 Selected Projects
 
-- GitHub: [@tamilarsen](https://github.com/tamilarsen)  
-- LinkedIn: [Tamil Arsen](#)  
-- Twitter: [@tamilarsen](#)  
+- **Node.js Backend Service** – REST API and backend logic  
+- **C++ Experiments** – Low-level concepts and problem-solving  
+- **Kotlin Playground** – Mobile development exploration  
+
+---
+
+### 🔗 Links
+
+- LinkedIn: https://linkedin.com/in/arsen-tamil-390a71235
