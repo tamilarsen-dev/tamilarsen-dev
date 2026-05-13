@@ -26,7 +26,6 @@ I primarily work with **Node.js (JavaScript/TypeScript)** for backend services, 
 
 - **Node.js Backend Service** – REST API and backend logic  
 - **C++ Experiments** – Low-level concepts and problem-solving  
-- **Kotlin Playground** – Mobile development exploration  
 
 ---
 
