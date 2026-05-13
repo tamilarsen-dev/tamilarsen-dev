@@ -3,8 +3,6 @@
 **Computer Science student** with a focus on **backend engineering** and system-oriented thinking.  
 I primarily work with **Node.js (JavaScript/TypeScript)** for backend services, while using **C++** to strengthen low-level understanding and problem-solving discipline.
 
-I also explore **Kotlin** for mobile development, with an emphasis on clean architecture and maintainable code.
-
 ---
 
 ### 🛠 Tech Stack
@@ -12,7 +10,6 @@ I also explore **Kotlin** for mobile development, with an emphasis on clean arch
 - **Languages**: JavaScript / TypeScript, C++
 - **Backend**: Node.js, Express.js
 - **Databases**: PostgreSQL
-- **Mobile**: Kotlin
 - **Tools**: Git, Linux
 
 ---
