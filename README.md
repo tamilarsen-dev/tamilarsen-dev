@@ -1,6 +1,6 @@
 ## Hi, I'm Tamil Arsen👋
 
-**Computer Science student** with a focus on **backend engineering** and system-oriented thinking.  
+**Informatics Engineering student** with a focus on **backend engineering** and system-oriented thinking.  
 I primarily work with **Node.js (JavaScript/TypeScript)** for backend services, while using **C++** to strengthen low-level understanding and problem-solving discipline.
 
 ---
