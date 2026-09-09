@@ -1,28 +1,31 @@
 # Hi, I'm Tamil Arsen 👋
 
-**Computer Science graduate** focused on **full-stack web development**, with a particular interest in **backend engineering** and software systems.
+**Computer Science graduate** focused on **full-stack web development**, with a
+particular interest in **backend engineering** and **software systems**.
 
-I build web applications and backend services using **TypeScript, JavaScript, Next.js, Node.js, and PostgreSQL**. I also use **C++** to strengthen my understanding of algorithms, data structures, performance, and problem solving.
-
----
-
-### 🛠 Tech Stack
-
-* **Languages**: TypeScript, JavaScript, C++
-* **Frontend**: Next.js, React, HTML, CSS, Tailwind CSS
-* **Backend**: Node.js, Express.js, REST APIs
-* **Databases**: PostgreSQL, SQL
-* **Tools**: Git, GitHub, Docker, Linux
+I build web applications and backend services using TypeScript, JavaScript,
+Next.js, Node.js, and PostgreSQL. I'm particularly interested in APIs,
+databases, software design, and writing clear, maintainable code.
 
 ---
 
-### 📍 Current Focus
+## 🛠 Tech Stack
 
-* Building full-stack web applications with **Next.js, TypeScript, and Node.js**
-* Designing and building **REST APIs** and backend services
-* Working with **PostgreSQL** and relational data
-* Improving code structure, clarity, and maintainability
-* Strengthening fundamentals through **C++**, algorithms, and data structures
+- **Languages:** TypeScript, JavaScript, C++
+- **Frontend:** Next.js, React, HTML, CSS, Tailwind CSS
+- **Backend:** Node.js, Express.js, REST APIs
+- **Database:** PostgreSQL, SQL
+- **Tools:** Git, GitHub, Docker, Linux
+
+---
+
+## 📍 Current Focus
+
+- Designing and building REST APIs and backend services
+- Building full-stack web applications with Next.js, TypeScript, and Node.js
+- Working with PostgreSQL and relational data
+- Improving code structure, clarity, and maintainability
+- Strengthening fundamentals through C++, algorithms, and data structures
 
 ---
 
