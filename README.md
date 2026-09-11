@@ -31,12 +31,20 @@ databases, software design, and writing clear, maintainable code.
 
 ### 📂 Selected Projects
 
-* **Full-Stack Web Applications** – Frontend, backend, API, and database integration
-* **Backend Services** – REST APIs, business logic, and database-driven applications
-* **C++ Projects** – Algorithms, data structures, and programming fundamentals
+## Personal Portfolio Website
+
+Personal portfolio website built to present my professional background,
+experience, projects, and technical skills.
+
+- **Stack:** Next.js, TypeScript, React, Tailwind CSS, shadcn/ui, MDX
+- **Focus:** Reusable components, centralized data, responsive UI, SEO, and
+  maintainable project structure
+- **Live:** https://tamilarsen-dev-portfolio.vercel.app
+- **Repository:** https://github.com/tamilarsen-dev/tamilarsen-dev-portfolio
 
 ---
 
 ### 🔗 Links
 
-* LinkedIn: https://www.linkedin.com/in/tamilarsen-dev/
+- LinkedIn: https://www.linkedin.com/in/tamilarsen-dev/
+- GitHub: https://github.com/tamilarsen-dev
