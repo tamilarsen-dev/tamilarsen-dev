@@ -39,7 +39,7 @@ experience, projects, and technical skills.
 - **Stack:** Next.js, TypeScript, React, Tailwind CSS, shadcn/ui, MDX
 - **Focus:** Reusable components, centralized data, responsive UI, SEO, and
   maintainable project structure
-- **Live:** https://tamilarsen-dev-portfolio.vercel.app
+- **Live:** https://tamil-arsen.dev/
 - **Repository:** https://github.com/tamilarsen-dev/tamilarsen-dev-portfolio
 
 ---
