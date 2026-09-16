@@ -29,22 +29,22 @@ databases, software design, and writing clear, maintainable code.
 
 ---
 
-### 📂 Selected Projects
+## 📂 Selected Projects
 
-## Personal Portfolio Website
+### Personal Website
 
-Personal portfolio website built to present my professional background,
-experience, projects, and technical skills.
+Personal website built to present my professional background, technical skills,
+writing, projects, and ways to get in touch.
 
 - **Stack:** Next.js, TypeScript, React, Tailwind CSS, shadcn/ui, MDX
-- **Focus:** Reusable components, centralized data, responsive UI, SEO, and
-  maintainable project structure
+- **Focus:** Reusable components, centralized data, responsive UI, technical
+  writing, SEO, and maintainable project structure
 - **Live:** https://tamil-arsen.dev/
-- **Repository:** https://github.com/tamilarsen-dev/tamilarsen-dev-portfolio
 
 ---
 
-### 🔗 Links
+## 🔗 Links
 
-- LinkedIn: https://www.linkedin.com/in/tamilarsen-dev/
-- GitHub: https://github.com/tamilarsen-dev
+- **Website:** https://tamil-arsen.dev/
+- **LinkedIn:** https://www.linkedin.com/in/tamilarsen-dev/
+- **GitHub:** https://github.com/tamilarsen-dev
