@@ -1,6 +1,8 @@
 <!-- Every card is a self-made SVG in ./assets (dark + light, follows your
      GitHub theme). GitHub strips CSS/JS from READMEs, so motion lives inside
-     the SVGs; prefers-reduced-motion is respected. -->
+     the SVGs; prefers-reduced-motion is respected.
+     The contributions card is generated: scripts/contributions.mjs, run daily
+     by .github/workflows/contributions.yml (no dependencies). -->
 
 <a href="https://tamil-arsen.dev">
 <picture>
@@ -23,6 +25,14 @@
   <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg" />
   <img src="./assets/stack-dark.svg" width="100%" alt="Stack — backend: Node.js, Express, TypeScript, PostgreSQL. Also: JavaScript, Next.js, React, Tailwind CSS. On the side: C++ and SFML." />
 </picture>
+
+<a href="https://github.com/tamilarsen-dev?tab=repositories">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/contributions-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="./assets/contributions-light.svg" />
+  <img src="./assets/contributions-dark.svg" width="100%" alt="My contributions over the last year, as a grid; a packet travels from each active day to the next and rests on today. Redrawn daily by .github/workflows/contributions.yml." />
+</picture>
+</a>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/principles-dark.svg" />
