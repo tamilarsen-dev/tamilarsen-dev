@@ -1,7 +1,9 @@
 // scripts/contributions.mjs
 //
-// Draws the contributions card for the profile README — the same idea as
-// the Activity section on tamil-arsen.dev: the year as a grid, and a packet
+// Draws the contributions calendar for the profile README, made to look like
+// GitHub's own (sizes, greens, labels) — the way the snake cards do it,
+// since GitHub's real calendar can't be touched from a README. On it, the
+// same idea as the Activity section on tamil-arsen.dev: a packet
 // (◆) that travels it in order, hopping from each day with a contribution
 // to the next along the grid's lines and leaving the route behind as a
 // hairline. It ends on today and rests there with a slow heartbeat.
@@ -13,12 +15,12 @@
 //   node scripts/contributions.mjs --demo                 (made-up data, to
 //                                                          look at the design)
 //
-// No dependencies: Node 20+ (fetch). Fonts are IBM Plex (OFL), embedded so
-// the card looks the same everywhere. GitHub shows README images through a
+// No dependencies: Node 20+ (fetch). Text uses GitHub's system font stack.
+// GitHub shows README images through a
 // proxy that strips scripts — all motion is CSS inside the SVG, and it
 // stands still for prefers-reduced-motion.
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -113,44 +115,30 @@ function stats(weeks) {
 }
 
 /* ── layout ───────────────────────────────────────────────────────────── */
+// Sized and coloured like GitHub's own calendar (10px cells, 3px gaps,
+// Primer greens), on a transparent background so it sits on the profile
+// page like the real one does.
 
-const W = 1280;
-const H = 318;
-const PAD = 64;
-const CELL = 14;
-const STEP = 18;
-const GX = PAD + 40; // grid left (day labels before it)
-const GY = 120; // grid top
+const CELL = 10;
+const STEP = 13;
+const GX = 32; // grid left (day labels before it)
+const GY = 22; // grid top (month labels above it)
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const THEMES = {
   dark: {
-    bg: "#141414",
-    fg: "#F4F4F5",
-    muted: "#A1A1AA",
-    subtle: "#84848C",
-    faint: "#5A5A62",
-    line: "#F4F4F5",
-    accent: "#B33A47",
-    accentText: "#CE6A75",
-    ok: "#22C55E",
-    okBg: "rgba(34,197,94,0.14)",
-    getBg: "rgba(179,58,71,0.16)",
-    levels: ["#222225", "#4A2328", "#76303A", "#A63D4B", "#D9707C"],
+    text: "#9198A1",
+    edge: "rgba(240,246,252,0.06)",
+    levels: ["#151B23", "#033A16", "#196C2E", "#2EA043", "#56D364"],
+    trace: "#56D364",
+    halo: "#0D1117",
   },
   light: {
-    bg: "#F5F4F2",
-    fg: "#18181B",
-    muted: "#52525B",
-    subtle: "#71717A",
-    faint: "#A1A1AA",
-    line: "#18181B",
-    accent: "#B33A47",
-    accentText: "#8E2A36",
-    ok: "#15803D",
-    okBg: "rgba(21,128,61,0.12)",
-    getBg: "rgba(179,58,71,0.12)",
-    levels: ["#E6E3DE", "#EBC3C7", "#DC8B95", "#C4505E", "#8E2A36"],
+    text: "#59636E",
+    edge: "rgba(31,35,40,0.06)",
+    levels: ["#EFF2F5", "#ACEEBB", "#4AC26B", "#2DA44E", "#116329"],
+    trace: "#1A7F37",
+    halo: "#FFFFFF",
   },
 };
 
@@ -221,47 +209,42 @@ function route(weeks) {
 
 /* ── svg ──────────────────────────────────────────────────────────────── */
 
-async function fontFaces() {
-  const face = async (family, file, weight) => {
-    const b64 = (await readFile(join(ROOT, "scripts/fonts", file))).toString("base64");
-    return `@font-face{font-family:'${family}';src:url(data:font/woff2;base64,${b64}) format('woff2');font-weight:${weight}}`;
-  };
-  return (
-    await Promise.all([
-      face("mono", "IBMPlexMono-400.woff2", 400),
-      face("mono", "IBMPlexMono-500.woff2", 500),
-      face("sansB", "IBMPlexSans-700.woff2", 700),
-    ])
-  ).join("");
-}
+const FONT = `-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif`;
 
-function card(cal, theme, fonts) {
+function card(cal, theme) {
   const c = THEMES[theme];
   const { weeks, total } = cal;
   const s = stats(weeks);
   const r = route(weeks);
   const gridW = weeks.length * STEP - (STEP - CELL);
+  const W = GX + gridW + 2;
+  const H = GY + 7 * STEP + 34;
   const out = [];
 
-  // month labels: where a month's first week starts
+  // month labels: where a month's first week starts (one that would crowd
+  // the label before it is skipped)
   let lastMonth = -1;
+  let lastX = -99;
   weeks.forEach((week, w) => {
     const m = Number(week[0].date.slice(5, 7)) - 1;
-    if (m !== lastMonth && w < weeks.length - 1) {
-      if (lastMonth !== -1 || week[0].date.slice(8) <= "07")
-        out.push(`<text x="${GX + w * STEP}" y="${GY - 14}" class="m t11" fill="${c.subtle}">${MONTHS[m]}</text>`);
+    if (m !== lastMonth) {
+      const x = GX + w * STEP;
+      if (x - lastX >= 30 && x + 22 <= GX + gridW) {
+        out.push(`<text x="${x}" y="${GY - 9}">${MONTHS[m]}</text>`);
+        lastX = x;
+      }
       lastMonth = m;
     }
   });
   ["Mon", "Wed", "Fri"].forEach((name, i) =>
-    out.push(`<text x="${PAD}" y="${GY + (i * 2 + 1) * STEP + 11}" class="m t11" fill="${c.faint}">${name}</text>`),
+    out.push(`<text x="0" y="${GY + (i * 2 + 1) * STEP + 9}">${name}</text>`),
   );
 
   // cells
   weeks.forEach((week, w) =>
     week.forEach((day, d) => {
       out.push(
-        `<rect x="${GX + w * STEP}" y="${GY + d * STEP}" width="${CELL}" height="${CELL}" rx="3" fill="${c.levels[day.level]}"><title>${esc(`${day.count} on ${fmtDay(day.date)}`)}</title></rect>`,
+        `<rect x="${GX + w * STEP}" y="${GY + d * STEP}" width="${CELL}" height="${CELL}" rx="2" fill="${c.levels[day.level]}" stroke="${c.edge}"><title>${esc(`${day.count === 0 ? "No" : day.count} contribution${day.count === 1 ? "" : "s"} on ${fmtDay(day.date)}`)}</title></rect>`,
       );
     }),
   );
@@ -271,17 +254,14 @@ function card(cal, theme, fonts) {
   if (r) {
     const end = r.stops.at(-1);
     const pct = (x) => `${r2(x)}%`;
-    const kfPacket = r.frames
-      .map(([t, dd], i) => `${pct(t)}{offset-distance:${pct(dd)};animation-timing-function:${i % 2 === 0 ? "cubic-bezier(.65,0,.35,1)" : "linear"}}`)
-      .join("");
-    const kfRoute = r.frames
-      .map(([t, dd], i) => `${pct(t)}{stroke-dashoffset:${r2(1000 - dd * 10)};animation-timing-function:${i % 2 === 0 ? "cubic-bezier(.65,0,.35,1)" : "linear"}}`)
-      .join("");
+    const ease = (i) => (i % 2 === 0 ? "cubic-bezier(.65,0,.35,1)" : "linear");
+    const kfPacket = r.frames.map(([t, dd], i) => `${pct(t)}{offset-distance:${pct(dd)};animation-timing-function:${ease(i)}}`).join("");
+    const kfRoute = r.frames.map(([t, dd], i) => `${pct(t)}{stroke-dashoffset:${r2(1000 - dd * 10)};animation-timing-function:${ease(i)}}`).join("");
     const T = r.total;
     css = `
 .route{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw ${T}ms ${START}ms both,settle 700ms ${START + T}ms both}
 @keyframes draw{${kfRoute}}
-@keyframes settle{to{opacity:.42}}
+@keyframes settle{to{opacity:.38}}
 .pk{opacity:0}
 @supports (offset-path:path("M0 0")){
  .pk{opacity:1;offset-path:path("${r.d}");offset-rotate:0deg;animation:travel ${T}ms ${START}ms both}
@@ -296,60 +276,30 @@ function card(cal, theme, fonts) {
 @media (prefers-reduced-motion:reduce){.route,.pk,.ring,.beat{display:none}.today{opacity:1;animation:none}}`;
 
     const rings = r.stops
-      .map((p, i) => `<rect class="ring" x="${p.x - 7}" y="${p.y - 7}" width="14" height="14" rx="3" fill="none" stroke="${c.accentText}" stroke-width="1.5" style="animation-delay:${Math.round(START + r.arrive[i])}ms"/>`)
+      .map((p, i) => `<rect class="ring" x="${p.x - 5}" y="${p.y - 5}" width="10" height="10" rx="2" fill="none" stroke="${c.trace}" stroke-width="1.2" style="animation-delay:${Math.round(START + r.arrive[i])}ms"/>`)
       .join("");
     motion = `
-<path class="route" d="${r.d}" pathLength="1000" fill="none" stroke="${c.accentText}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="route" d="${r.d}" pathLength="1000" fill="none" stroke="${c.trace}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
 ${rings}
-<rect class="beat" x="${end.x - 8}" y="${end.y - 8}" width="16" height="16" rx="3" fill="none" stroke="${c.accentText}" stroke-width="1.5"/>
-<rect class="today" x="${end.x - 9}" y="${end.y - 9}" width="18" height="18" rx="4" fill="none" stroke="${c.accentText}" stroke-width="1.5"/>
-<g class="pk"><rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" fill="${c.accentText}" stroke="${c.bg}" stroke-width="2"/></g>`;
+<rect class="beat" x="${end.x - 6}" y="${end.y - 6}" width="12" height="12" rx="2" fill="none" stroke="${c.trace}" stroke-width="1.2"/>
+<rect class="today" x="${end.x - 7}" y="${end.y - 7}" width="14" height="14" rx="3" fill="none" stroke="${c.trace}" stroke-width="1.2"/>
+<g class="pk"><rect x="-3.6" y="-3.6" width="7.2" height="7.2" transform="rotate(45)" fill="${c.trace}" stroke="${c.halo}" stroke-width="1.5"/></g>`;
   }
 
-  const activeToday = s.today.count > 0;
-  const statusText = activeToday ? "ACTIVE TODAY" : `LAST ACTIVE · ${fmtDay([...weeks.flat()].reverse().find((d) => d.count > 0)?.date ?? s.today.date).toUpperCase()}`;
-  const legendX = GX + gridW - 5 * 18;
-  const sx = GX + gridW + 56; // stats column
+  const legendX = GX + gridW - 32 - 5 * STEP + (STEP - CELL); // "More" ends at the grid's edge
+  const by = H - 9; // bottom row baseline
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(`${total} contributions in the last year — longest streak ${s.longest} days`)}">
-<style>${fonts}
-.m{font-family:'mono',ui-monospace,monospace}.b{font-family:'sansB',system-ui,sans-serif;font-weight:700}
-.t11{font-size:11px;letter-spacing:.06em}.t13{font-size:13px}.t15{font-size:15px}.cap{font-size:11px;letter-spacing:.16em}
+<style>
+text{font-family:${FONT};font-size:12px;fill:${c.text}}
 ${css}
 </style>
-<rect width="${W}" height="${H}" rx="12" fill="${c.bg}"/>
-
-<g class="m t15">
-  <rect x="${PAD}" y="38" width="46" height="26" rx="13" fill="${c.getBg}"/>
-  <text x="${PAD + 23}" y="56" text-anchor="middle" fill="${c.accentText}" font-weight="500" class="t13">GET</text>
-  <text x="${PAD + 60}" y="56" fill="${c.subtle}">/users/<tspan fill="${c.fg}">${esc(LOGIN)}</tspan>/contributions</text>
-  <rect x="${PAD + 60 + (21 + LOGIN.length) * 9 + 12}" y="38" width="46" height="26" rx="13" fill="${c.okBg}"/>
-  <text x="${PAD + 60 + (21 + LOGIN.length) * 9 + 35}" y="56" text-anchor="middle" fill="${c.ok}" font-weight="500" class="t13">200</text>
-</g>
-<g class="m cap" fill="${activeToday ? c.ok : c.subtle}">
-  <circle cx="${W - PAD - statusText.length * 8.4 - 14}" cy="51" r="4" fill="${activeToday ? c.ok : c.faint}"/>
-  <text x="${W - PAD}" y="55" text-anchor="end">${esc(statusText)}</text>
-</g>
-
 ${out.join("\n")}
 ${motion}
-
-<g>
-  <text x="${sx}" y="${GY + 34}" class="b" font-size="46" fill="${c.fg}">${total}</text>
-  <text x="${sx}" y="${GY + 58}" class="m t13" fill="${c.muted}">contributions</text>
-  <text x="${sx}" y="${GY + 76}" class="m t13" fill="${c.subtle}">last year</text>
-  <text x="${sx}" y="${GY + 108}" class="m cap" fill="${c.subtle}">STREAK</text>
-  <text x="${sx + 70}" y="${GY + 108}" class="m t13" fill="${c.fg}">${s.current}d</text>
-  <text x="${sx}" y="${GY + 128}" class="m cap" fill="${c.subtle}">LONGEST</text>
-  <text x="${sx + 70}" y="${GY + 128}" class="m t13" fill="${c.fg}">${s.longest}d</text>
-</g>
-
-<g class="m">
-  <text x="${GX}" y="${H - 36}" class="cap" fill="${c.subtle}">BEST DAY · <tspan fill="${c.fg}">${esc(fmtDay(s.best.date).toUpperCase())} · ${s.best.count}</tspan></text>
-  <text x="${legendX - 10}" y="${H - 36}" class="t11" text-anchor="end" fill="${c.subtle}">Less</text>
-  ${c.levels.map((l, i) => `<rect x="${legendX + i * 18}" y="${H - 47}" width="${CELL}" height="${CELL}" rx="3" fill="${l}"/>`).join("")}
-  <text x="${legendX + 5 * 18 + 6}" y="${H - 36}" class="t11" fill="${c.subtle}">More</text>
-</g>
+<text x="${GX}" y="${by}">${total} contributions in the last year · longest streak ${s.longest}d</text>
+<text x="${legendX - 6}" y="${by}" text-anchor="end">Less</text>
+${c.levels.map((l, i) => `<rect x="${legendX + i * STEP}" y="${by - 9}" width="${CELL}" height="${CELL}" rx="2" fill="${l}" stroke="${c.edge}"/>`).join("")}
+<text x="${legendX + 5 * STEP + 3}" y="${by}">More</text>
 </svg>
 `;
 }
@@ -357,10 +307,9 @@ ${motion}
 /* ── run ──────────────────────────────────────────────────────────────── */
 
 const cal = process.argv.includes("--demo") ? demoCalendar() : await fetchCalendar();
-const fonts = await fontFaces();
 await mkdir(join(ROOT, "assets"), { recursive: true });
 for (const theme of ["dark", "light"]) {
   const file = join(ROOT, `assets/contributions-${theme}.svg`);
-  await writeFile(file, card(cal, theme, fonts));
+  await writeFile(file, card(cal, theme));
   console.log(`wrote ${file}`);
 }

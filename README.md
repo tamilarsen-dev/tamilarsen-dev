@@ -1,8 +1,9 @@
 <!-- Every card is a self-made SVG in ./assets (dark + light, follows your
      GitHub theme). GitHub strips CSS/JS from READMEs, so motion lives inside
      the SVGs; prefers-reduced-motion is respected.
-     The contributions card is generated: scripts/contributions.mjs, run daily
-     by .github/workflows/contributions.yml (no dependencies). -->
+     The contributions calendar is generated to look like GitHub's own (the
+     real one can't be animated from a README): scripts/contributions.mjs,
+     run daily by .github/workflows/contributions.yml (no dependencies). -->
 
 <a href="https://tamil-arsen.dev">
 <picture>
@@ -30,7 +31,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/contributions-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="./assets/contributions-light.svg" />
-  <img src="./assets/contributions-dark.svg" width="100%" alt="My contributions over the last year, as a grid; a packet travels from each active day to the next and rests on today. Redrawn daily by .github/workflows/contributions.yml." />
+  <img src="./assets/contributions-dark.svg" width="100%" alt="My GitHub contributions over the last year, drawn like GitHub's own calendar; a packet travels from each active day to the next and rests on today. Redrawn daily by .github/workflows/contributions.yml." />
 </picture>
 </a>
 
